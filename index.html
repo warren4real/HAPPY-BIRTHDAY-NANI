@@ -44,12 +44,11 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     z-index:-3;
-    /* Make the image visible */
     opacity: 1;
     display: block;
   }
 
-  /* Adjust overlay to keep text readable while showing the flower */
+  /* Soft overlay for text readability */
   .backdrop::after{
     content:"";
     position:absolute;
@@ -65,6 +64,7 @@
         rgba(5,4,9,0) 25%);
   }
 
+  /* falling petals */
   #petal-field{
     position:fixed;
     inset:0;
@@ -291,7 +291,22 @@
     <svg viewBox="0 0 24 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d="M12 0C18 8 20 24 20 34C20 48 16 58 12 60C8 58 4 48 4 34C4 24 6 8 12 0Z" fill="currentColor"/>
     </svg>
+    Open a wish
+  </button>
+</main>
 
+<div class="note-overlay" id="noteOverlay" role="dialog" aria-modal="true" aria-label="A birthday wish for Nani">
+  <div class="note-card">
+    <button class="note-close" id="closeNote" aria-label="Close">&times;</button>
+    <span class="mark">For Nani</span>
+    <p>
+      Wishing you a year that's as bright, bold, and wonderfully unrepeatable as you are.
+      Thank you for the laughter, the warmth, and every bit of yourself you share with the people
+      around you. May today feel exactly as good as you deserve.
+    </p>
+    <span class="sign">With love, always</span>
+  </div>
+</div>
 
 <svg width="0" height="0" style="position:absolute">
   <defs>
@@ -304,6 +319,7 @@
 </svg>
 
 <script>
+  // Generate drifting petals
   (function(){
     const field = document.getElementById('petal-field');
     const count = window.innerWidth < 600 ? 9 : 15;
@@ -334,6 +350,7 @@
     }
   })();
 
+  // Note overlay open/close
   (function(){
     const openBtn = document.getElementById('openNote');
     const closeBtn = document.getElementById('closeNote');
