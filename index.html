@@ -1,411 +1,621 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Happy Birthday, Nani 🌸</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;1,400;1,500&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-  :root{
-    --void:#050409;
-    --ink:#f7f3f8;
-    --gold:#e9c983;
-    --overlay-bottom: rgba(5,4,9,0.85);
-  }
 
-  *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-  }
+:root {
+    --white: #ffffff;
+    --soft-white: #f8f3f8;
+    --gold: #e9c983;
+    --purple: #b85aa9;
+    --dark: rgba(5, 4, 9, 0.35);
+}
 
-  html,
-  body{
-    width:100%;
-    min-height:100%;
-    background:#050409;
-    color:var(--ink);
-    font-family:'Manrope', sans-serif;
-    overflow-x:hidden;
-  }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-  /* =========================================
-     BACKGROUND IMAGE
-     popeyeflower.png must be beside index.html
-     ========================================= */
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    background: #050409;
+    overflow-x: hidden;
+}
 
-  .backdrop{
-    position:fixed;
-    inset:0;
-    width:100vw;
-    height:100vh;
-    z-index:0;
-    overflow:hidden;
-    background:#050409;
-  }
+body {
+    font-family: 'Manrope', sans-serif;
+    color: var(--white);
+}
 
-  .backdrop img{
-    position:absolute;
-    inset:0;
 
-    width:100%;
-    height:100%;
+/* =========================================
+   FULL SCREEN FLOWER BACKGROUND
+   ========================================= */
 
-    /* Makes the flower fill the entire screen */
-    object-fit:cover;
+.background {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    background: #050409;
+}
 
-    /* Center the image */
-    object-position:center center;
+.background img {
+    width: 100%;
+    height: 100%;
 
-    display:block;
-  }
+    object-fit: cover;
+    object-position: center center;
 
-  /* Dark overlay so the text remains readable */
-  .backdrop::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-      linear-gradient(
-        to bottom,
-        rgba(5,4,9,0.05) 0%,
-        rgba(5,4,9,0.08) 30%,
-        rgba(5,4,9,0.50) 62%,
-        rgba(5,4,9,0.88) 100%
-      );
-    z-index:1;
-  }
+    display: block;
+}
 
-  /* =========================================
-     FALLING PETALS
-     ========================================= */
 
-  #petal-field{
-    position:fixed;
-    inset:0;
-    z-index:2;
-    pointer-events:none;
-    overflow:hidden;
-  }
+/* VERY LIGHT OVERLAY
+   Keeps the flower visible */
 
-  .petal{
-    position:absolute;
-    top:-8vh;
-    width:14px;
-
-    filter:drop-shadow(0 4px 6px rgba(0,0,0,0.35));
-
-    animation-name:fall, sway;
-    animation-timing-function:linear, ease-in-out;
-    animation-iteration-count:infinite, infinite;
-
-    opacity:0.7;
-  }
-
-  @keyframes fall{
-    from{
-      transform:translateY(-10vh) rotate(0deg);
-    }
-
-    to{
-      transform:translateY(112vh) rotate(340deg);
-    }
-  }
-
-  @keyframes sway{
-    0%,100%{
-      margin-left:0;
-    }
-
-    50%{
-      margin-left:26px;
-    }
-  }
-
-  /* =========================================
-     CONTENT
-     ========================================= */
-
-  main{
-    position:relative;
-    z-index:3;
-
-    min-height:100vh;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-    align-items:center;
-
-    text-align:center;
-
-    padding:8vh 6vw 7vh;
-  }
-
-  .eyebrow{
-    font-family:'Manrope', sans-serif;
-
-    font-size:0.72rem;
-    letter-spacing:0.42em;
-    text-transform:uppercase;
-
-    color:var(--gold);
-    opacity:0.95;
-
-    margin-bottom:0.9rem;
-
-    text-shadow:
-      0 2px 8px rgba(0,0,0,0.7);
-  }
-
-  h1.script{
-    font-family:'Fraunces', serif;
-    font-style:italic;
-    font-weight:400;
-
-    font-size:clamp(1.6rem, 4.2vw, 2.6rem);
-    line-height:1.05;
-
-    color:var(--ink);
-
-    text-shadow:
-      0 2px 10px rgba(0,0,0,0.7);
-  }
-
-  h1.name{
-    font-family:'Manrope', sans-serif;
-    font-weight:800;
-
-    letter-spacing:0.14em;
-
-    font-size:clamp(3rem, 13vw, 7.2rem);
-    line-height:0.95;
-
-    margin:0.15em 0 0.5em;
+.background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
 
     background:
-      linear-gradient(
-        180deg,
-        #ffffff 0%,
-        #f1def0 38%,
-        #9a2f83 92%
-      );
+        linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.02) 0%,
+            rgba(0, 0, 0, 0.02) 55%,
+            rgba(0, 0, 0, 0.28) 100%
+        );
 
-    -webkit-background-clip:text;
-    background-clip:text;
+    pointer-events: none;
+}
 
-    color:transparent;
+
+/* =========================================
+   PETALS
+   ========================================= */
+
+#petal-field {
+    position: fixed;
+    inset: 0;
+
+    z-index: 2;
+
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.petal {
+    position: absolute;
+    top: -10vh;
+
+    width: 12px;
+
+    opacity: 0.65;
+
+    filter:
+        drop-shadow(
+            0 3px 5px rgba(0, 0, 0, 0.25)
+        );
+
+    animation-name: fall, sway;
+
+    animation-timing-function:
+        linear,
+        ease-in-out;
+
+    animation-iteration-count:
+        infinite,
+        infinite;
+}
+
+
+/* Falling */
+
+@keyframes fall {
+
+    from {
+        transform:
+            translateY(-10vh)
+            rotate(0deg);
+    }
+
+    to {
+        transform:
+            translateY(115vh)
+            rotate(340deg);
+    }
+
+}
+
+
+/* Side-to-side movement */
+
+@keyframes sway {
+
+    0%,
+    100% {
+        margin-left: 0;
+    }
+
+    50% {
+        margin-left: 25px;
+    }
+
+}
+
+
+/* =========================================
+   CONTENT
+   ========================================= */
+
+.content {
+
+    position: relative;
+
+    z-index: 3;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    text-align: center;
+
+    padding:
+
+        0 25px
+        clamp(35px, 7vh, 75px);
+
+}
+
+
+/* =========================================
+   SMALL INTRO
+   ========================================= */
+
+.eyebrow {
+
+    font-size: 0.65rem;
+
+    letter-spacing: 0.38em;
+
+    text-transform: uppercase;
+
+    color: var(--gold);
+
+    margin-bottom: 10px;
 
     text-shadow:
-      0 18px 40px rgba(90,20,90,0.5);
-  }
+        0 2px 8px rgba(0, 0, 0, 0.55);
 
-  .message{
-    max-width:34rem;
+}
 
-    font-size:clamp(0.98rem, 1.6vw, 1.15rem);
-    line-height:1.6;
 
-    color:#f0e9f1;
-    font-weight:400;
+/* =========================================
+   HAPPY BIRTHDAY
+   ========================================= */
 
-    margin-bottom:2.4rem;
+.title {
+
+    font-family: 'Fraunces', serif;
+
+    font-style: italic;
+
+    font-weight: 400;
+
+    font-size:
+        clamp(
+            1.7rem,
+            4vw,
+            2.7rem
+        );
+
+    line-height: 1;
+
+    color: var(--soft-white);
 
     text-shadow:
-      0 1px 5px rgba(0,0,0,0.8);
-  }
+        0 3px 12px rgba(0, 0, 0, 0.55);
 
-  /* Mobile */
-  @media (max-width:480px){
+}
 
-    main{
-      padding:6vh 6vw 6vh;
+
+/* =========================================
+   NAME
+   ========================================= */
+
+.name {
+
+    font-family: 'Manrope', sans-serif;
+
+    font-weight: 800;
+
+    font-size:
+        clamp(
+            3rem,
+            10vw,
+            6.5rem
+        );
+
+    letter-spacing: 0.18em;
+
+    line-height: 0.95;
+
+    margin-top: 8px;
+
+    margin-left: 0.18em;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #f5e5f3 45%,
+            #c46ab4 100%
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+
+    filter:
+        drop-shadow(
+            0 8px 20px
+            rgba(0, 0, 0, 0.35)
+        );
+
+}
+
+
+/* =========================================
+   SHORT MESSAGE
+   ========================================= */
+
+.message {
+
+    max-width: 480px;
+
+    margin-top: 18px;
+
+    font-size:
+        clamp(
+            0.82rem,
+            1.5vw,
+            1rem
+        );
+
+    line-height: 1.6;
+
+    color: #f7f1f7;
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.7);
+
+}
+
+
+/* =========================================
+   DECORATIVE LINE
+   ========================================= */
+
+.line {
+
+    width: 45px;
+
+    height: 1px;
+
+    background: rgba(233, 201, 131, 0.75);
+
+    margin-top: 18px;
+
+    margin-bottom: 2px;
+
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .content {
+
+        padding:
+            0 20px
+            35px;
+
     }
 
-    .eyebrow{
-      font-size:0.62rem;
-      letter-spacing:0.30em;
+    .eyebrow {
+
+        font-size: 0.58rem;
+
+        letter-spacing: 0.28em;
+
     }
 
-    h1.name{
-      letter-spacing:0.10em;
-    }
-  }
+    .name {
 
-  /* Respect reduced-motion preference */
-  @media (prefers-reduced-motion:reduce){
+        font-size: 3.5rem;
 
-    .petal{
-      animation:none;
-      display:none;
+        letter-spacing: 0.12em;
+
     }
-  }
+
+    .message {
+
+        max-width: 330px;
+
+        font-size: 0.82rem;
+
+    }
+
+}
+
+
+/* =========================================
+   REDUCED MOTION
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .petal {
+
+        animation: none;
+
+        display: none;
+
+    }
+
+}
+
 </style>
 </head>
 
+
 <body>
 
+
 <!-- =========================================
-     BACKGROUND
+     FLOWER BACKGROUND
      ========================================= -->
 
-<div class="backdrop">
-  <img
-    src="./popeyeflower.png"
-    alt=""
-  >
+<div class="background">
+
+    <img
+        src="./popeyeflower.png"
+        alt=""
+    >
+
 </div>
 
-<!-- Falling petals -->
+
+
+<!-- =========================================
+     FALLING PETALS
+     ========================================= -->
+
 <div id="petal-field"></div>
 
 
+
 <!-- =========================================
-     MAIN MESSAGE
+     BIRTHDAY MESSAGE
      ========================================= -->
 
-<main>
+<main class="content">
 
-  <div class="eyebrow">
-    A small bloom of a message for
-  </div>
+    <div class="eyebrow">
+        A little bloom for you
+    </div>
 
-  <h1 class="script">
-    Happy Birthday
-  </h1>
+    <h1 class="title">
+        Happy Birthday
+    </h1>
 
-  <h1 class="name">
-    NANI
-  </h1>
+    <h2 class="name">
+        NANI
+    </h2>
 
-  <p class="message">
-    Some people light up every room they walk into — you're one of them.
-    Here's to another year that suits you as beautifully as this one did.
-  </p>
+    <p class="message">
+        May this new year of your life be filled
+        with beautiful moments, quiet joys,
+        and everything that makes you smile.
+    </p>
+
+    <div class="line"></div>
 
 </main>
 
 
+
 <!-- =========================================
-     PETAL SVG DEFINITION
+     PETAL SVG
      ========================================= -->
 
-<svg width="0" height="0" style="position:absolute">
-  <defs>
+<svg
+    width="0"
+    height="0"
+    style="position:absolute"
+>
 
-    <linearGradient id="petalGrad" x1="0" y1="0" x2="0" y2="1">
+    <defs>
 
-      <stop
-        offset="0%"
-        stop-color="#ffffff"
-      />
+        <linearGradient
+            id="petalGradient"
+            x1="0"
+            y1="0"
+            x2="0"
+            y2="1"
+        >
 
-      <stop
-        offset="55%"
-        stop-color="#f0e2f0"
-      />
+            <stop
+                offset="0%"
+                stop-color="#ffffff"
+            />
 
-      <stop
-        offset="100%"
-        stop-color="#8a2f82"
-      />
+            <stop
+                offset="55%"
+                stop-color="#f0e2f0"
+            />
 
-    </linearGradient>
+            <stop
+                offset="100%"
+                stop-color="#9a2f83"
+            />
 
-  </defs>
+        </linearGradient>
+
+    </defs>
+
 </svg>
+
 
 
 <script>
 
-  /* =========================================
-     GENERATE FALLING PETALS
-     ========================================= */
+/* =========================================
+   CREATE FALLING PETALS
+   ========================================= */
 
-  (function(){
+(function () {
 
     const field =
-      document.getElementById('petal-field');
+        document.getElementById(
+            "petal-field"
+        );
 
     const count =
-      window.innerWidth < 600 ? 9 : 15;
+        window.innerWidth < 600
+            ? 8
+            : 14;
 
     const petalPath =
-      "M12 0C18 8 20 24 20 34C20 48 16 58 12 60C8 58 4 48 4 34C4 24 6 8 12 0Z";
+        "M12 0C18 8 20 24 20 34C20 48 16 58 12 60C8 58 4 48 4 34C4 24 6 8 12 0Z";
 
-    for(let i = 0; i < count; i++){
 
-      const svgNS =
-        "http://www.w3.org/2000/svg";
+    for (
+        let i = 0;
+        i < count;
+        i++
+    ) {
 
-      const svg =
-        document.createElementNS(
-          svgNS,
-          "svg"
+        const svgNS =
+            "http://www.w3.org/2000/svg";
+
+
+        const svg =
+            document.createElementNS(
+                svgNS,
+                "svg"
+            );
+
+
+        svg.setAttribute(
+            "viewBox",
+            "0 0 24 60"
         );
 
-      svg.setAttribute(
-        "viewBox",
-        "0 0 24 60"
-      );
 
-      svg.classList.add("petal");
-
-      const scale =
-        (Math.random() * 0.9 + 0.6).toFixed(2);
-
-      const duration =
-        (Math.random() * 10 + 14).toFixed(1);
-
-      const delay =
-        (Math.random() * -24).toFixed(1);
-
-      const left =
-        (Math.random() * 100).toFixed(1);
-
-      const swayDur =
-        (Math.random() * 4 + 4).toFixed(1);
-
-      svg.style.left =
-        left + "vw";
-
-      svg.style.width =
-        (14 * scale) + "px";
-
-      svg.style.animationDuration =
-        duration + "s, " + swayDur + "s";
-
-      svg.style.animationDelay =
-        delay + "s, " + delay + "s";
-
-      const path =
-        document.createElementNS(
-          svgNS,
-          "path"
+        svg.classList.add(
+            "petal"
         );
 
-      path.setAttribute(
-        "d",
-        petalPath
-      );
 
-      path.setAttribute(
-        "fill",
-        "url(#petalGrad)"
-      );
+        const scale =
+            Math.random() * 0.8 + 0.6;
 
-      svg.appendChild(path);
 
-      field.appendChild(svg);
+        const fallDuration =
+            Math.random() * 10 + 15;
+
+
+        const swayDuration =
+            Math.random() * 4 + 4;
+
+
+        const delay =
+            Math.random() * -25;
+
+
+        const left =
+            Math.random() * 100;
+
+
+        svg.style.left =
+            left + "vw";
+
+
+        svg.style.width =
+            (14 * scale) + "px";
+
+
+        svg.style.animationDuration =
+            fallDuration + "s, "
+            + swayDuration + "s";
+
+
+        svg.style.animationDelay =
+            delay + "s, "
+            + delay + "s";
+
+
+        const path =
+            document.createElementNS(
+                svgNS,
+                "path"
+            );
+
+
+        path.setAttribute(
+            "d",
+            petalPath
+        );
+
+
+        path.setAttribute(
+            "fill",
+            "url(#petalGradient)"
+        );
+
+
+        svg.appendChild(
+            path
+        );
+
+
+        field.appendChild(
+            svg
+        );
+
     }
 
-  })();
+})();
 
 </script>
+
 
 </body>
 </html>
