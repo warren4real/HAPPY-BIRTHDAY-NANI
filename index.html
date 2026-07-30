@@ -1,378 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Happy Birthday, Nani 🌸</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Happy Birthday, Nani 🌸</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;1,400;1,500&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;1,400;1,500&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
 
-<style>
-  :root{
-    --void:#050409;
-    --ink:#f7f3f8;
-    --petal-white:#f5eef5;
-    --violet:#9a2f83;
-    --violet-deep:#5b1f5e;
-    --indigo:#4a4bc7;
-    --gold:#e9c983;
-    --overlay-bottom: rgba(5,4,9,0.85);
-  }
+    <style>
+        :root {
+            --void: #050409;
+            --ink: #f7f3f8;
+            --gold: #e9c983;
+            --overlay-bottom: rgba(5, 4, 9, 0.92);
+        }
 
-  *{ margin:0; padding:0; box-sizing:border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  html, body{
-    height:100%;
-    background: var(--void);
-    color: var(--ink);
-    font-family: 'Manrope', sans-serif;
-    overflow-x:hidden;
-    position: relative;
-  }
+        html,
+        body {
+            height: 100%;
+            background: var(--void);
+            color: var(--ink);
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+        }
 
-  /* FIXED BACKGROUND WITH FLOWER IMAGE */
-  .backdrop{
-    position:fixed;
-    inset:0;
-    width: 100%;
-    height: 100%;
-    background-image: url('popeyeflower.png');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    z-index:-3;
-    /* Make the image visible */
-    opacity: 1;
-    display: block;
-  }
+        /* ---------- background photo ---------- */
+        .backdrop {
+            position: fixed;
+            inset: 0;
+            background-image: url('popeyeflower.png');
+            background-size: cover;
+            background-position: center 42%;
+            z-index: -3;
+        }
 
-  /* Adjust overlay to keep text readable while showing the flower */
-  .backdrop::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-      linear-gradient(to bottom, 
-        rgba(5,4,9,0.1) 0%, 
-        rgba(5,4,9,0.1) 30%, 
-        rgba(5,4,9,0.7) 65%, 
-        rgba(5,4,9,0.92) 100%),
-      linear-gradient(to top, 
-        rgba(5,4,9,0.25) 0%, 
-        rgba(5,4,9,0) 25%);
-  }
+        .backdrop::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to bottom, rgba(5, 4, 9, 0.15) 0%, rgba(5, 4, 9, 0.15) 40%, var(--overlay-bottom) 78%, var(--void) 100%),
+                linear-gradient(to top, rgba(5, 4, 9, 0.35) 0%, rgba(5, 4, 9, 0) 18%);
+        }
 
-  #petal-field{
-    position:fixed;
-    inset:0;
-    z-index:-1;
-    pointer-events:none;
-    overflow:hidden;
-  }
+        /* ---------- falling petals ---------- */
+        #petal-field {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
 
-  .petal{
-    position:absolute;
-    top:-8vh;
-    width:14px;
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.35));
-    animation-name: fall, sway;
-    animation-timing-function: linear, ease-in-out;
-    animation-iteration-count: infinite, infinite;
-    opacity:0.7;
-  }
+        .petal {
+            position: absolute;
+            top: -8vh;
+            width: 14px;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.35));
+            animation-name: fall, sway;
+            animation-timing-function: linear, ease-in-out;
+            animation-iteration-count: infinite, infinite;
+            opacity: 0.85;
+        }
 
-  @keyframes fall{
-    from{ transform: translateY(-10vh) rotate(0deg); }
-    to{ transform: translateY(112vh) rotate(340deg); }
-  }
-  @keyframes sway{
-    0%,100%{ margin-left:0px; }
-    50%{ margin-left:26px; }
-  }
+        @keyframes fall {
+            from {
+                transform: translateY(-10vh) rotate(0deg);
+            }
+            to {
+                transform: translateY(112vh) rotate(340deg);
+            }
+        }
 
-  @media (prefers-reduced-motion: reduce){
-    .petal{ animation: none; display:none; }
-  }
+        @keyframes sway {
+            0%,
+            100% {
+                margin-left: 0px;
+            }
+            50% {
+                margin-left: 26px;
+            }
+        }
 
-  main{
-    position:relative;
-    z-index:1;
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-    align-items:center;
-    text-align:center;
-    padding: 8vh 6vw 7vh;
-  }
+        @media (prefers-reduced-motion: reduce) {
+            .petal {
+                animation: none;
+                display: none;
+            }
+        }
 
-  .eyebrow{
-    font-family:'Manrope', sans-serif;
-    font-size:0.72rem;
-    letter-spacing:0.42em;
-    text-transform:uppercase;
-    color: var(--gold);
-    opacity:0.9;
-    margin-bottom:0.9rem;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-  }
+        /* ---------- content ---------- */
+        main {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            text-align: center;
+            padding: 8vh 6vw 7vh;
+        }
 
-  h1.script{
-    font-family:'Fraunces', serif;
-    font-style:italic;
-    font-weight:400;
-    font-size: clamp(1.6rem, 4.2vw, 2.6rem);
-    color: var(--ink);
-    line-height:1.05;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
-  }
+        .eyebrow {
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.42em;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0.85;
+            margin-bottom: 0.9rem;
+        }
 
-  h1.name{
-    font-family:'Manrope', sans-serif;
-    font-weight:800;
-    letter-spacing:0.14em;
-    font-size: clamp(3rem, 13vw, 7.2rem);
-    line-height:0.95;
-    margin: 0.15em 0 0.5em;
-    background: linear-gradient(180deg, #ffffff 0%, #f1def0 38%, var(--violet) 92%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: 0 18px 40px rgba(90,20,90,0.35);
-  }
+        h1.script {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: clamp(1.6rem, 4.2vw, 2.6rem);
+            color: var(--ink);
+            line-height: 1.05;
+        }
 
-  .message{
-    max-width: 34rem;
-    font-size: clamp(0.98rem, 1.6vw, 1.15rem);
-    line-height:1.6;
-    color: #e9e2ea;
-    font-weight:400;
-    margin-bottom: 2.4rem;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-  }
+        h1.name {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 800;
+            letter-spacing: 0.14em;
+            font-size: clamp(3rem, 13vw, 7.2rem);
+            line-height: 0.95;
+            margin: 0.15em 0 0.5em;
+            background: linear-gradient(180deg, #ffffff 0%, #f1def0 38%, var(--violet) 92%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 18px 40px rgba(90, 20, 90, 0.35);
+        }
 
-  .wish-trigger{
-    display:inline-flex;
-    align-items:center;
-    gap:0.6rem;
-    background: rgba(5,4,9,0.5);
-    backdrop-filter: blur(10px);
-    border:1px solid rgba(233,201,131,0.6);
-    color: var(--gold);
-    font-family:'Manrope', sans-serif;
-    font-size:0.82rem;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    padding:0.85rem 1.6rem;
-    border-radius:999px;
-    cursor:pointer;
-    transition: background 0.35s ease, color 0.35s ease, transform 0.2s ease;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
-  }
-  .wish-trigger:hover, .wish-trigger:focus-visible{
-    background: rgba(233,201,131,0.2);
-    transform: translateY(-2px);
-  }
-  .wish-trigger:focus-visible{
-    outline: 2px solid var(--gold);
-    outline-offset: 3px;
-  }
-  .wish-trigger svg{ width:14px; height:14px; }
+        .message {
+            max-width: 34rem;
+            font-size: clamp(0.98rem, 1.6vw, 1.15rem);
+            line-height: 1.6;
+            color: #e9e2ea;
+            font-weight: 400;
+            margin-bottom: 2.4rem;
+        }
 
-  .note-overlay{
-    position:fixed;
-    inset:0;
-    z-index:20;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding: 6vw;
-    background: rgba(3,2,7,0.72);
-    backdrop-filter: blur(6px);
-    opacity:0;
-    pointer-events:none;
-    transition: opacity 0.4s ease;
-  }
-  .note-overlay.open{
-    opacity:1;
-    pointer-events:auto;
-  }
-
-  .note-card{
-    position:relative;
-    max-width: 30rem;
-    width:100%;
-    background: linear-gradient(165deg, #12101a 0%, #1c1424 60%, #2a1730 100%);
-    border:1px solid rgba(233,201,131,0.28);
-    border-radius: 22px;
-    padding: 3rem 2.4rem 2.6rem;
-    text-align:center;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.55);
-    transform: translateY(24px) scale(0.97);
-    transition: transform 0.45s cubic-bezier(.2,.8,.2,1);
-  }
-  .note-overlay.open .note-card{
-    transform: translateY(0) scale(1);
-  }
-
-  .note-card .mark{
-    font-family:'Fraunces', serif;
-    font-style:italic;
-    font-size:1.9rem;
-    color: var(--gold);
-    display:block;
-    margin-bottom:1.1rem;
-  }
-
-  .note-card p{
-    font-family:'Fraunces', serif;
-    font-size: clamp(1.05rem, 2.4vw, 1.3rem);
-    line-height:1.65;
-    color:#f4eef6;
-  }
-
-  .note-card .sign{
-    display:block;
-    margin-top:1.6rem;
-    font-family:'Manrope', sans-serif;
-    letter-spacing:0.18em;
-    text-transform:uppercase;
-    font-size:0.72rem;
-    color: rgba(247,243,248,0.55);
-  }
-
-  .note-close{
-    position:absolute;
-    top:14px;
-    right:16px;
-    width:34px;
-    height:34px;
-    border-radius:50%;
-    border:1px solid rgba(247,243,248,0.25);
-    background:transparent;
-    color: var(--ink);
-    font-size:1.1rem;
-    line-height:1;
-    cursor:pointer;
-    transition: background 0.25s ease;
-  }
-  .note-close:hover, .note-close:focus-visible{
-    background: rgba(247,243,248,0.12);
-  }
-  .note-close:focus-visible{
-    outline:2px solid var(--gold);
-    outline-offset:2px;
-  }
-
-  @media (max-width:480px){
-    main{ padding: 6vh 6vw 6vh; }
-    .note-card{ padding: 2.4rem 1.6rem 2.1rem; }
-  }
-</style>
+        @media (max-width: 480px) {
+            main {
+                padding: 6vh 6vw 6vh;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="backdrop"></div>
-<div id="petal-field"></div>
+    <div class="backdrop"></div>
+    <div id="petal-field"></div>
 
-<main>
-  <div class="eyebrow">A small bloom of a message for</div>
-  <h1 class="script">Happy Birthday</h1>
-  <h1 class="name">NANI</h1>
-  <p class="message">
-    Some people light up every room they walk into — you're one of them.
-    Here's to another year that suits you as beautifully as this one did.
-  </p>
+    <main>
+        <div class="eyebrow">A small bloom of a message for</div>
+        <h1 class="script">Happy Birthday</h1>
+        <h1 class="name">NANI</h1>
+        <p class="message">
+            Some people light up every room they walk into — you're one of them.
+            Here's to another year that suits you as beautifully as this one did.
+        </p>
+    </main>
 
-  <button class="wish-trigger" id="openNote" aria-haspopup="dialog" aria-expanded="false">
-    <svg viewBox="0 0 24 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M12 0C18 8 20 24 20 34C20 48 16 58 12 60C8 58 4 48 4 34C4 24 6 8 12 0Z" fill="currentColor"/>
+    <svg width="0" height="0" style="position:absolute">
+        <defs>
+            <linearGradient id="petalGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="55%" stop-color="#f0e2f0" />
+                <stop offset="100%" stop-color="#8a2f82" />
+            </linearGradient>
+        </defs>
     </svg>
-    Open a wish
-  </button>
-</main>
 
-<div class="note-overlay" id="noteOverlay" role="dialog" aria-modal="true" aria-label="A birthday wish for Nani">
-  <div class="note-card">
-    <button class="note-close" id="closeNote" aria-label="Close">&times;</button>
-    <span class="mark">For Nani</span>
-    <p>
-      Wishing you a year that's as bright, bold, and wonderfully unrepeatable as you are.
-      Thank you for the laughter, the warmth, and every bit of yourself you share with the people
-      around you. May today feel exactly as good as you deserve.
-    </p>
-    <span class="sign">With love, always</span>
-  </div>
-</div>
+    <script>
+        // Generate drifting petals matching the photo's palette
+        (function() {
+            const field = document.getElementById('petal-field');
+            const count = window.innerWidth < 600 ? 9 : 15;
+            const petalPath = "M12 0C18 8 20 24 20 34C20 48 16 58 12 60C8 58 4 48 4 34C4 24 6 8 12 0Z";
 
-<svg width="0" height="0" style="position:absolute">
-  <defs>
-    <linearGradient id="petalGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="55%" stop-color="#f0e2f0"/>
-      <stop offset="100%" stop-color="#8a2f82"/>
-    </linearGradient>
-  </defs>
-</svg>
+            for (let i = 0; i < count; i++) {
+                const svgNS = "http://www.w3.org/2000/svg";
+                const svg = document.createElementNS(svgNS, "svg");
+                svg.setAttribute("viewBox", "0 0 24 60");
+                svg.classList.add("petal");
 
-<script>
-  (function(){
-    const field = document.getElementById('petal-field');
-    const count = window.innerWidth < 600 ? 9 : 15;
-    const petalPath = "M12 0C18 8 20 24 20 34C20 48 16 58 12 60C8 58 4 48 4 34C4 24 6 8 12 0Z";
+                const scale = (Math.random() * 0.9 + 0.6).toFixed(2);
+                const duration = (Math.random() * 10 + 14).toFixed(1);
+                const delay = (Math.random() * -24).toFixed(1);
+                const left = (Math.random() * 100).toFixed(1);
+                const swayDur = (Math.random() * 4 + 4).toFixed(1);
 
-    for(let i=0; i<count; i++){
-      const svgNS = "http://www.w3.org/2000/svg";
-      const svg = document.createElementNS(svgNS, "svg");
-      svg.setAttribute("viewBox", "0 0 24 60");
-      svg.classList.add("petal");
+                svg.style.left = left + "vw";
+                svg.style.width = (14 * scale) + "px";
+                svg.style.animationDuration = duration + "s, " + swayDur + "s";
+                svg.style.animationDelay = delay + "s, " + delay + "s";
 
-      const scale = (Math.random()*0.9 + 0.6).toFixed(2);
-      const duration = (Math.random()*10 + 14).toFixed(1);
-      const delay = (Math.random()*-24).toFixed(1);
-      const left = (Math.random()*100).toFixed(1);
-      const swayDur = (Math.random()*4 + 4).toFixed(1);
-
-      svg.style.left = left + "vw";
-      svg.style.width = (14*scale) + "px";
-      svg.style.animationDuration = duration + "s, " + swayDur + "s";
-      svg.style.animationDelay = delay + "s, " + delay + "s";
-
-      const path = document.createElementNS(svgNS, "path");
-      path.setAttribute("d", petalPath);
-      path.setAttribute("fill", "url(#petalGrad)");
-      svg.appendChild(path);
-      field.appendChild(svg);
-    }
-  })();
-
-  (function(){
-    const openBtn = document.getElementById('openNote');
-    const closeBtn = document.getElementById('closeNote');
-    const overlay = document.getElementById('noteOverlay');
-
-    function open(){
-      overlay.classList.add('open');
-      openBtn.setAttribute('aria-expanded', 'true');
-      closeBtn.focus();
-    }
-    function close(){
-      overlay.classList.remove('open');
-      openBtn.setAttribute('aria-expanded', 'false');
-      openBtn.focus();
-    }
-
-    openBtn.addEventListener('click', open);
-    closeBtn.addEventListener('click', close);
-    overlay.addEventListener('click', (e) => { if(e.target === overlay) close(); });
-    document.addEventListener('keydown', (e) => {
-      if(e.key === 'Escape' && overlay.classList.contains('open')) close();
-    });
-  })();
-</script>
+                const path = document.createElementNS(svgNS, "path");
+                path.setAttribute("d", petalPath);
+                path.setAttribute("fill", "url(#petalGrad)");
+                svg.appendChild(path);
+                field.appendChild(svg);
+            }
+        })();
+    </script>
 
 </body>
 </html>
