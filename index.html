@@ -31,7 +31,6 @@
     overflow-x:hidden;
   }
 
-  /* ---------- background photo ---------- */
   .backdrop{
     position:fixed;
     inset:0;
@@ -50,7 +49,6 @@
       linear-gradient(to top, rgba(5,4,9,0.35) 0%, rgba(5,4,9,0) 18%);
   }
 
-  /* ---------- falling petals ---------- */
   #petal-field{
     position:fixed;
     inset:0;
@@ -83,7 +81,6 @@
     .petal{ animation: none; display:none; }
   }
 
-  /* ---------- content ---------- */
   main{
     position:relative;
     z-index:1;
@@ -138,7 +135,6 @@
     margin-bottom: 2.4rem;
   }
 
-  /* ---------- petal-note interaction ---------- */
   .wish-trigger{
     display:inline-flex;
     align-items:center;
@@ -165,7 +161,6 @@
   }
   .wish-trigger svg{ width:14px; height:14px; }
 
-  /* ---------- note overlay ---------- */
   .note-overlay{
     position:fixed;
     inset:0;
@@ -303,7 +298,6 @@
 </svg>
 
 <script>
-  // Generate drifting petals matching the photo's palette
   (function(){
     const field = document.getElementById('petal-field');
     const count = window.innerWidth < 600 ? 9 : 15;
@@ -334,7 +328,6 @@
     }
   })();
 
-  // Note overlay open/close
   (function(){
     const openBtn = document.getElementById('openNote');
     const closeBtn = document.getElementById('closeNote');
