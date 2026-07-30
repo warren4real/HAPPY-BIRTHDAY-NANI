@@ -38,6 +38,7 @@
     inset:0;
     width: 100%;
     height: 100%;
+    /* Try both paths - GitHub Pages serves from root */
     background-image: url('popeyeflower.png');
     background-size: cover;
     background-position: center center;
@@ -46,6 +47,11 @@
     z-index:-3;
     opacity: 1;
     display: block;
+  }
+
+  /* If the image doesn't load, show a dark gradient fallback */
+  .backdrop.fallback{
+    background-image: linear-gradient(135deg, #1a0a1e 0%, #0d0815 50%, #050409 100%);
   }
 
   /* Soft overlay for text readability */
@@ -161,7 +167,7 @@
 </head>
 <body>
 
-<div class="backdrop"></div>
+<div class="backdrop" id="backdrop"></div>
 <div id="petal-field"></div>
 
 <main>
@@ -185,6 +191,22 @@
 </svg>
 
 <script>
+  // Check if the background image loaded, if not add fallback class
+  (function(){
+    const backdrop = document.getElementById('backdrop');
+    const img = new Image();
+    img.onload = function() {
+      // Image loaded successfully
+      backdrop.classList.remove('fallback');
+    };
+    img.onerror = function() {
+      // Image failed to load - add fallback
+      backdrop.classList.add('fallback');
+      console.log('popeyeflower.png not found. Please make sure the file is in the root directory.');
+    };
+    img.src = 'popeyeflower.png';
+  })();
+
   // Generate drifting petals
   (function(){
     const field = document.getElementById('petal-field');
