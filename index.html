@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Happy Birthday, Nani</title>
+<title>Happy Birthday, Nani 🌸</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +18,7 @@
     --violet-deep:#5b1f5e;
     --indigo:#4a4bc7;
     --gold:#e9c983;
-    --overlay-bottom: rgba(5,4,9,0.92);
+    --overlay-bottom: rgba(5,4,9,0.85);
   }
 
   *{ margin:0; padding:0; box-sizing:border-box; }
@@ -29,24 +29,40 @@
     color: var(--ink);
     font-family: 'Manrope', sans-serif;
     overflow-x:hidden;
+    position: relative;
   }
 
+  /* FIXED BACKGROUND WITH FLOWER IMAGE */
   .backdrop{
     position:fixed;
     inset:0;
+    width: 100%;
+    height: 100%;
     background-image: url('popeyeflower.png');
     background-size: cover;
-    background-position: center 42%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     z-index:-3;
+    /* Make the image visible */
+    opacity: 1;
+    display: block;
   }
 
+  /* Adjust overlay to keep text readable while showing the flower */
   .backdrop::after{
     content:"";
     position:absolute;
     inset:0;
     background:
-      linear-gradient(to bottom, rgba(5,4,9,0.15) 0%, rgba(5,4,9,0.15) 40%, var(--overlay-bottom) 78%, var(--void) 100%),
-      linear-gradient(to top, rgba(5,4,9,0.35) 0%, rgba(5,4,9,0) 18%);
+      linear-gradient(to bottom, 
+        rgba(5,4,9,0.1) 0%, 
+        rgba(5,4,9,0.1) 30%, 
+        rgba(5,4,9,0.7) 65%, 
+        rgba(5,4,9,0.92) 100%),
+      linear-gradient(to top, 
+        rgba(5,4,9,0.25) 0%, 
+        rgba(5,4,9,0) 25%);
   }
 
   #petal-field{
@@ -65,7 +81,7 @@
     animation-name: fall, sway;
     animation-timing-function: linear, ease-in-out;
     animation-iteration-count: infinite, infinite;
-    opacity:0.85;
+    opacity:0.7;
   }
 
   @keyframes fall{
@@ -99,8 +115,9 @@
     letter-spacing:0.42em;
     text-transform:uppercase;
     color: var(--gold);
-    opacity:0.85;
+    opacity:0.9;
     margin-bottom:0.9rem;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
   }
 
   h1.script{
@@ -110,6 +127,7 @@
     font-size: clamp(1.6rem, 4.2vw, 2.6rem);
     color: var(--ink);
     line-height:1.05;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
   }
 
   h1.name{
@@ -133,14 +151,16 @@
     color: #e9e2ea;
     font-weight:400;
     margin-bottom: 2.4rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
 
   .wish-trigger{
     display:inline-flex;
     align-items:center;
     gap:0.6rem;
-    background:transparent;
-    border:1px solid rgba(233,201,131,0.55);
+    background: rgba(5,4,9,0.5);
+    backdrop-filter: blur(10px);
+    border:1px solid rgba(233,201,131,0.6);
     color: var(--gold);
     font-family:'Manrope', sans-serif;
     font-size:0.82rem;
@@ -150,9 +170,10 @@
     border-radius:999px;
     cursor:pointer;
     transition: background 0.35s ease, color 0.35s ease, transform 0.2s ease;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
   }
   .wish-trigger:hover, .wish-trigger:focus-visible{
-    background: rgba(233,201,131,0.12);
+    background: rgba(233,201,131,0.2);
     transform: translateY(-2px);
   }
   .wish-trigger:focus-visible{
