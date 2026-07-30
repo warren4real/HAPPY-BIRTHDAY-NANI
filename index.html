@@ -154,122 +154,8 @@
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
 
-  .wish-trigger{
-    display:inline-flex;
-    align-items:center;
-    gap:0.6rem;
-    background: rgba(5,4,9,0.5);
-    backdrop-filter: blur(10px);
-    border:1px solid rgba(233,201,131,0.6);
-    color: var(--gold);
-    font-family:'Manrope', sans-serif;
-    font-size:0.82rem;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    padding:0.85rem 1.6rem;
-    border-radius:999px;
-    cursor:pointer;
-    transition: background 0.35s ease, color 0.35s ease, transform 0.2s ease;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
-  }
-  .wish-trigger:hover, .wish-trigger:focus-visible{
-    background: rgba(233,201,131,0.2);
-    transform: translateY(-2px);
-  }
-  .wish-trigger:focus-visible{
-    outline: 2px solid var(--gold);
-    outline-offset: 3px;
-  }
-  .wish-trigger svg{ width:14px; height:14px; }
-
-  .note-overlay{
-    position:fixed;
-    inset:0;
-    z-index:20;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding: 6vw;
-    background: rgba(3,2,7,0.72);
-    backdrop-filter: blur(6px);
-    opacity:0;
-    pointer-events:none;
-    transition: opacity 0.4s ease;
-  }
-  .note-overlay.open{
-    opacity:1;
-    pointer-events:auto;
-  }
-
-  .note-card{
-    position:relative;
-    max-width: 30rem;
-    width:100%;
-    background: linear-gradient(165deg, #12101a 0%, #1c1424 60%, #2a1730 100%);
-    border:1px solid rgba(233,201,131,0.28);
-    border-radius: 22px;
-    padding: 3rem 2.4rem 2.6rem;
-    text-align:center;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.55);
-    transform: translateY(24px) scale(0.97);
-    transition: transform 0.45s cubic-bezier(.2,.8,.2,1);
-  }
-  .note-overlay.open .note-card{
-    transform: translateY(0) scale(1);
-  }
-
-  .note-card .mark{
-    font-family:'Fraunces', serif;
-    font-style:italic;
-    font-size:1.9rem;
-    color: var(--gold);
-    display:block;
-    margin-bottom:1.1rem;
-  }
-
-  .note-card p{
-    font-family:'Fraunces', serif;
-    font-size: clamp(1.05rem, 2.4vw, 1.3rem);
-    line-height:1.65;
-    color:#f4eef6;
-  }
-
-  .note-card .sign{
-    display:block;
-    margin-top:1.6rem;
-    font-family:'Manrope', sans-serif;
-    letter-spacing:0.18em;
-    text-transform:uppercase;
-    font-size:0.72rem;
-    color: rgba(247,243,248,0.55);
-  }
-
-  .note-close{
-    position:absolute;
-    top:14px;
-    right:16px;
-    width:34px;
-    height:34px;
-    border-radius:50%;
-    border:1px solid rgba(247,243,248,0.25);
-    background:transparent;
-    color: var(--ink);
-    font-size:1.1rem;
-    line-height:1;
-    cursor:pointer;
-    transition: background 0.25s ease;
-  }
-  .note-close:hover, .note-close:focus-visible{
-    background: rgba(247,243,248,0.12);
-  }
-  .note-close:focus-visible{
-    outline:2px solid var(--gold);
-    outline-offset:2px;
-  }
-
   @media (max-width:480px){
     main{ padding: 6vh 6vw 6vh; }
-    .note-card{ padding: 2.4rem 1.6rem 2.1rem; }
   }
 </style>
 </head>
@@ -286,27 +172,7 @@
     Some people light up every room they walk into — you're one of them.
     Here's to another year that suits you as beautifully as this one did.
   </p>
-
-  <button class="wish-trigger" id="openNote" aria-haspopup="dialog" aria-expanded="false">
-    <svg viewBox="0 0 24 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M12 0C18 8 20 24 20 34C20 48 16 58 12 60C8 58 4 48 4 34C4 24 6 8 12 0Z" fill="currentColor"/>
-    </svg>
-    Open a wish
-  </button>
 </main>
-
-<div class="note-overlay" id="noteOverlay" role="dialog" aria-modal="true" aria-label="A birthday wish for Nani">
-  <div class="note-card">
-    <button class="note-close" id="closeNote" aria-label="Close">&times;</button>
-    <span class="mark">For Nani</span>
-    <p>
-      Wishing you a year that's as bright, bold, and wonderfully unrepeatable as you are.
-      Thank you for the laughter, the warmth, and every bit of yourself you share with the people
-      around you. May today feel exactly as good as you deserve.
-    </p>
-    <span class="sign">With love, always</span>
-  </div>
-</div>
 
 <svg width="0" height="0" style="position:absolute">
   <defs>
@@ -348,31 +214,6 @@
       svg.appendChild(path);
       field.appendChild(svg);
     }
-  })();
-
-  // Note overlay open/close
-  (function(){
-    const openBtn = document.getElementById('openNote');
-    const closeBtn = document.getElementById('closeNote');
-    const overlay = document.getElementById('noteOverlay');
-
-    function open(){
-      overlay.classList.add('open');
-      openBtn.setAttribute('aria-expanded', 'true');
-      closeBtn.focus();
-    }
-    function close(){
-      overlay.classList.remove('open');
-      openBtn.setAttribute('aria-expanded', 'false');
-      openBtn.focus();
-    }
-
-    openBtn.addEventListener('click', open);
-    closeBtn.addEventListener('click', close);
-    overlay.addEventListener('click', (e) => { if(e.target === overlay) close(); });
-    document.addEventListener('keydown', (e) => {
-      if(e.key === 'Escape' && overlay.classList.contains('open')) close();
-    });
   })();
 </script>
 
